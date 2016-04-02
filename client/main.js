@@ -18,3 +18,10 @@ Template.body.helpers({
   }
   
 });
+
+Template.websites.helpers({
+  
+  websites: function(){
+	  return Websites.find();
+  }
+});
