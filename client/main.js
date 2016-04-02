@@ -22,7 +22,8 @@ Template.body.helpers({
 Template.websites.helpers({
   
   websites: function(){
-	  return Websites.find();
+	  return Websites.find({},
+      {sort: {votes: -1, createdOn: -1}});
   }
 });
 
