@@ -31,6 +31,17 @@
   </div>
 </template>
 
+<template name="website">
+  <div class="container">
+    <h2>
+      {{title}}
+    </h2>
+    <p>
+      {{description}}
+    </p>
+  </div>
+</template>
+
 <template name="websites">
   
   {{> website_add_form}}
@@ -51,7 +62,9 @@
           
           <div class="caption">
             <h3>
-              {{title}}              
+              <a href="/website/{{_id}}">
+                {{title}}            
+              </a>  
             </h3>
             <p>
               {{description}}

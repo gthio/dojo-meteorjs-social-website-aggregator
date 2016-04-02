@@ -20,6 +20,22 @@ Router.route('/websites', function(){
   });
 });
 
+Router.route('/website/:_id', function(){
+  
+  this.render('navbar', {
+    to:"navbar"
+  });
+  
+  this.render('website', {
+    to:"main",
+    data: function(){
+      
+      return Websites.findOne(
+        {_id: this.params._id});
+    }
+  });
+});
+
 Accounts.ui.config({
   passwordSignupFields: "USERNAME_AND_EMAIL"
 });
