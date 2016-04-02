@@ -10,6 +10,8 @@
     </div>
   </nav>
   
+  {{> website_add_form}}
+  
   <div class="container">
   
     <h1>Welcome to social website aggregator {{userName}}</h1>  
@@ -22,6 +24,14 @@
 
 <template name="websites">
   <div class="container js-container">
+    
+    {{#if currentUser}}
+    
+      <button class="btn btn-success js-show-website-form">
+        add website
+      </button>
+      
+    {{/if}} 
    
     <div class="row">
       {{#each websites}}
@@ -36,10 +46,45 @@
             </p>
           </div>
           
-        </div>
-      
+        </div>      
       {{/each}}
     </div>
     
   </div>
+</template>
+
+<template name="website_add_form">
+  <div class="modal fade" id="website_add_form">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <div class="modal-title">
+          </div>  
+        </div>
+        
+        <div class="modal-body">
+          <form class="js-add-website">
+            <input type="text" name="website_title" />
+            <br/>
+            <input type="text" name="website_description" />
+            <br/>
+            <input type="text" name="website_url" />
+            <br/>
+            <button class="btn btn-success">
+              save
+            </button>
+          </form>          
+        </div>
+        
+        <div class="modal-footer">
+          <button class="btn btn-warning" data-dismiss="modal">
+            cancel
+          </button>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+
 </template>
