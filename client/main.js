@@ -1,4 +1,25 @@
 
+Router.configure({
+  layoutTemplate: 'ApplicationLayout'
+});
+
+Router.route('/', function(){
+  this.render('welcome', {
+    to:"main"
+  });
+});
+
+Router.route('/websites', function(){
+  
+  this.render('navbar', {
+    to:"navbar"
+  });
+  
+  this.render('websites', {
+    to:"main"
+  });
+});
+
 Accounts.ui.config({
   passwordSignupFields: "USERNAME_AND_EMAIL"
 });
@@ -29,15 +50,18 @@ Template.websites.helpers({
 
 Template.websites.events({
   
-  'click .js-show-website-form': function (event) {
-    
+  'click .js-show-website-form': function (event){
+
     $("#website_add_form").modal('show');
-  }
+  },
+  
 });
 
 Template.website_add_form.events({
   
   'submit .js-add-website': function(event){
+    
+
     
     var title = event.target
       .website_title.value;
@@ -59,7 +83,7 @@ Template.website_add_form.events({
       });
     }
     
-    $("#website_add_form").modal('hide');
+    $("#website_add_form").modal('show');
     
     return false;
   }

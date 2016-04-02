@@ -2,27 +2,39 @@
   <title>Social website aggregator</title>
 </head>
 
-<body>
-  
+<body></body>
+
+<template name="ApplicationLayout">
+  {{> yield "navbar"}}
+  {{> yield "main"}}    
+</template>
+
+<template name="navbar">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       {{> loginButtons}}
     </div>
   </nav>
+</template>
+
+<template name="welcome">
+  <div class="container">
+    <div class="jumbotron">
+      <h1>
+        Welcome to website share {{userName}}
+      </h1>
+
+      <a href="/websites" class="btn btn-info">
+        Enter
+      </a>
+    </div>
+  </div>
+</template>
+
+<template name="websites">
   
   {{> website_add_form}}
   
-  <div class="container">
-  
-    <h1>Welcome to social website aggregator {{userName}}</h1>  
-    <br/>
-    {{> websites}}
-    
-  </div>
-  
-</body>
-
-<template name="websites">
   <div class="container js-container">
     
     {{#if currentUser}}
