@@ -39,6 +39,42 @@
     <p>
       {{description}}
     </p>
+    Comments:
+    {{> comments}}
+    
+    {{#if currentUser}}
+      {{> add_comment}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="comments">
+  <ul>
+    {{#each commentByCreatedOn _id}}
+      {{> comment}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="comment">
+  <li>
+    <p>
+      {{comment}}
+    </p>
+    {{createdBy}}
+    {{createdOn}}
+  </li>
+</template>
+
+<template name="add_comment">
+  <div>
+    <form class="js-add-comment">
+      <input type="text" name="comment_comment" />
+      <br/>
+      <button class="btn btn-success">
+        save
+      </button>
+    </form>
   </div>
 </template>
 

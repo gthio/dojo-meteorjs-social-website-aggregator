@@ -76,9 +76,7 @@ Template.websites.events({
 Template.website_add_form.events({
   
   'submit .js-add-website': function(event){
-    
-
-    
+        
     var title = event.target
       .website_title.value;
     
@@ -105,3 +103,31 @@ Template.website_add_form.events({
   }
   
 });
+
+Template.comments.helpers({
+  
+  commentByCreatedOn: function(websiteID){
+    return Comments.find(
+      {websiteID: websiteID},
+      {sort: {createdOn: -1}});
+  }
+});
+
+Template.add_comment.events({
+  
+  'submit .js-add-comment': function(event){
+    
+    if (Meteor.user()) {
+      
+      Comments.insert({
+        
+        comment: event.target.comment_comment.value,
+        websiteID: this._id,
+        ownerID: Meteor.userId(),
+        createdOn: new Date()
+      });
+    }
+  }      
+});
+
+
