@@ -1,85 +1,32 @@
-
-Router.configure({
-  layoutTemplate: 'ApplicationLayout'
-});
-
-Router.route('/', function(){
-  this.render('welcome', {
-    to:"main"
-  });
-});
-
-Router.route('/websites', function(){
-  
-  this.render('navbar', {
-    to:"navbar"
-  });
-  
-  this.render('websites', {
-    to:"main"
-  });
-});
-
-Router.route('/website/:_id', function(){
-  
-  this.render('navbar', {
-    to:"navbar"
-  });
-  
-  this.render('website', {
-    to:"main",
-    data: function(){
-      
-      return Websites.findOne(
-        {_id: this.params._id});
-    }
-  });
-});
-
-Accounts.ui.config({
-  passwordSignupFields: "USERNAME_AND_EMAIL"
-});
-
-Template.body.helpers({
-  
-  userName: function(){
-    
-    if (Meteor.user()){
-      
+Template.body.helpers({  
+  userName: function(){    
+    if (Meteor.user()){     
       return Meteor.user().username;
     }
-    else{
-      
+    else{      
       return "Anonymous";
     }
   }
-  
 });
 
 Template.websites.helpers({
-  
   websites: function(){
 	  return Websites.find({},
       {sort: {votes: -1, createdOn: -1}});
   }
 });
 
-Template.websites.events({
-  
+Template.websites.events({  
   'click .js-show-website-form': function (event){
-
     $("#website_add_form").modal('show');
   },
-  
 });
 
-Template.website_add_form.events({
-  
-  'submit .js-add-website': function(event){
-        
+Template.website_add_form.events({  
+  'submit .js-add-website': function(event){        
     var title = event.target
       .website_title.value;
-    
+ 
     var description = event.target
       .website_description.value;
       
@@ -88,7 +35,6 @@ Template.website_add_form.events({
     
     if (Meteor.user()) {
       Websites.insert({
-        
         title: title,
         description: description,
         url: url,
@@ -101,11 +47,9 @@ Template.website_add_form.events({
     
     return false;
   }
-  
 });
 
 Template.comments.helpers({
-  
   commentByCreatedOn: function(websiteID){
     return Comments.find(
       {websiteID: websiteID},
@@ -114,13 +58,11 @@ Template.comments.helpers({
 });
 
 Template.add_comment.events({
-  
   'submit .js-add-comment': function(event){
     
     if (Meteor.user()) {
-      
-      Comments.insert({
-        
+            
+      Comments.insert({        
         comment: event.target.comment_comment.value,
         websiteID: this._id,
         ownerID: Meteor.userId(),
@@ -129,5 +71,3 @@ Template.add_comment.events({
     }
   }      
 });
-
-
