@@ -22,6 +22,26 @@ Template.websites.events({
   },
 });
 
+Template.website.events({
+  'click .js-upvote': function(event) {
+    if (Meteor.user()){
+      Meteor.call('addVote', 
+        Meteor.userId(),
+        this._id,
+        1)
+    }
+  },
+  
+  'click .js-downvote': function(event) {
+    if (Meteor.user()){
+      Meteor.call('addVote',
+        Meteor.userId(),
+        this._id,
+        -1)
+    }
+  }
+});
+
 Template.website_add_form.events({  
   'submit .js-add-website': function(event){        
     var title = event.target

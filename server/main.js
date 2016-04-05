@@ -35,3 +35,28 @@ Meteor.startup(function () {
   }
 });
 
+Meteor.methods({
+  'addVote': function(userId, siteId, vote){
+    return addVote(userId,
+      siteId,
+      vote);
+  }
+});
+
+function addVote(userId, 
+  siteId,
+  vote) {
+    
+    if (Votes.find({userId: userId, siteId: siteId})
+      .count() == 0){
+    
+        if (userId && siteId && vote){
+          Votes.insert({
+            userId: userId,
+            siteId: siteId,
+            vote: vote
+          });
+        }
+      }
+  }
+
