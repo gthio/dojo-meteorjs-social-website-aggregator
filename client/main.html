@@ -39,6 +39,9 @@
     <p>
       {{description}}
     </p>
+
+    {{#if currentUser}}
+    
     <div>
       <a href="#" class="btn btn-xs btn-success js-upvote">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -51,6 +54,8 @@
         {{downVotes}}
       </a>      
     </div>    
+    
+    {{/if}}
     
     Comments:
     {{> comments}}
