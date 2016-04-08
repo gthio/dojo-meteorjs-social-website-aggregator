@@ -58,5 +58,10 @@ function addVote(userId,
           });
         }
       }
+      else{
+        Votes.update({siteId: siteId, 
+          userId: userId}, {$set: {vote: vote}});
+      }
+      
   }
 

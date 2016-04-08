@@ -13,6 +13,17 @@ Template.websites.helpers({
   websites: function(){
 	  return Websites.find({},
       {sort: {votes: -1, createdOn: -1}});
+  },
+  
+  votes: function(websiteID){
+    
+    var total = 0;
+    
+    Votes.find({siteId: websiteID})
+      .map(function(item){
+        total += item.vote});
+        
+    return total;
   }
 });
 
