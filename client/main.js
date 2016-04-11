@@ -16,7 +16,7 @@ Template.websites.helpers({
   },
   
   votes: function(websiteID){
-    
+       
     var total = 0;
     
     Votes.find({siteId: websiteID})
@@ -55,25 +55,16 @@ Template.website.events({
 
 Template.website_add_form.events({  
   'submit .js-add-website': function(event){        
-    var title = event.target
-      .website_title.value;
- 
-    var description = event.target
-      .website_description.value;
       
     var url = event.target
       .website_url.value;
-    
-    if (Meteor.user()) {
-      Websites.insert({
-        title: title,
-        description: description,
-        url: url,
-        createdOn: new Date(),
-        createdBy: Meteor.user()._id
-      });
-    }
-    
+   
+   if (Meteor.user()){
+    Meteor.call('addWebsite',
+      Meteor.user()._id,
+      url);  
+   }
+   
     $("#website_add_form").modal('show');
     
     return false;
