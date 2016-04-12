@@ -6,3 +6,11 @@ body{
 .thumbnail{
   height: 300px;    
 }
+
+.wrap {
+    word-wrap: break-word;
+    position:justify;
+    width: 200px;
+    height: auto;
+    overflow-x: auto;
+}

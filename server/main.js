@@ -54,7 +54,7 @@ Meteor.methods({
         }
         else{
 
-          var titleTagStart = '<title>';
+          var titleTagStart = '<title';
           var titleTagEnd = '</title>';
           
           var descriptionTagStart = 'description" content="';
@@ -65,9 +65,13 @@ Meteor.methods({
           var keywordTagStart = '<meta name="keywords" content="';          
           var keyWordTagEnd = '" />';
           
-          var titleStart = response.content.toLowerCase().indexOf(titleTagStart),
+          var titleStart = response.content.toLowerCase().indexOf(titleTagStart),            
+            titleStartTo = response.content.toLowerCase().indexOf('>', titleStart),                      
             titleEnd = response.content.toLowerCase().indexOf(titleTagEnd),
-            titleText = response.content.substring(titleStart + titleTagStart.length, titleEnd);
+            
+            titleLength = titleStartTo - titleStart + 1,
+            
+            titleText = response.content.substring(titleStart + titleLength, titleEnd);
           
           var descriptionStart = response.content.toLowerCase().indexOf(descriptionTagStart, 1),
             descriptionEnd1 = response.content.toLowerCase().indexOf(descriptionTagEnd1, descriptionStart),
