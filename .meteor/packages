@@ -24,3 +24,4 @@ accounts-password
 twbs:bootstrap
 iron:router
 http
+fortawesome:fontawesome
