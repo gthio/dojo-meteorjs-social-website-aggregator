@@ -101,8 +101,25 @@
               
               {{#if currentUser}}
 
-                <i class="fa fa-thumbs-up js-upvote" aria-hidden="true"></i>  
-                <i class="fa fa-thumbs-down js-downvote" aria-hidden="true"></i>                
+                {{#if isMyVote _id 1}}    
+                  <i class="fa fa-thumbs-up js-upvote" aria-hidden="true"></i>  
+                  <i class="fa fa-thumbs-o-down js-downvote" aria-hidden="true"></i>                               
+                {{/if}}
+
+                {{#if isMyVote _id -1}}    
+                  <i class="fa fa-thumbs-o-up js-upvote" aria-hidden="true"></i>  
+                  <i class="fa fa-thumbs-down js-downvote" aria-hidden="true"></i>                               
+                {{/if}}
+
+                {{#if isMyVote _id null}}    
+                  <i class="fa fa-thumbs-o-up js-upvote" aria-hidden="true"></i>  
+                  <i class="fa fa-thumbs-o-down js-downvote" aria-hidden="true"></i>                               
+                {{/if}}
+    
+              {{else}}
+              
+                <i class="fa fa-thumbs-up" aria-hidden="true" style="color: grey"></i>  
+                <i class="fa fa-thumbs-down" aria-hidden="true" style="color: grey"></i>  
     
               {{/if}}          
               

@@ -15,6 +15,23 @@ Template.websites.helpers({
       {sort: {votes: -1, createdOn: -1}});
   },
   
+  isMyVote: function(websiteID,
+    voteValue){
+      
+    var result = Votes.findOne({siteId: websiteID,
+      userId: Meteor.userId()});
+      
+    if (voteValue &&
+      result){
+      return result.vote == voteValue;
+    } 
+    
+    if (voteValue == null &&
+      result == null){
+      return true;
+    }
+  },  
+  
   votes: function(websiteID){
        
     var total = 0;
