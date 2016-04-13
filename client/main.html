@@ -39,23 +39,6 @@
     <p>
       {{description}}
     </p>
-
-    {{#if currentUser}}
-    
-    <div>
-      <a href="#" class="btn btn-xs btn-success js-upvote">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        {{upVotes}}
-      </a>      
-    </div>
-    <div>
-      <a href="#" class="btn btn-xs btn-success js-downvote">
-        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-        {{downVotes}}
-      </a>      
-    </div>    
-    
-    {{/if}}
     
     Comments:
     {{> comments}}
@@ -115,8 +98,15 @@
         <div id="{{_id}}" class="col-xs-12 col-md-3">          
           <div class="thumbnail">
             <div class="caption">
-              <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-              <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+              
+              {{#if currentUser}}
+
+                <i class="fa fa-thumbs-up js-upvote" aria-hidden="true"></i>  
+                <i class="fa fa-thumbs-down js-downvote" aria-hidden="true"></i>                
+    
+              {{/if}}          
+              
+
               <div class="wrap">
                 <h4>
                   <a href="/website/{{_id}}">

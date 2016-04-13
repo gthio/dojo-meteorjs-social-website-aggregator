@@ -31,9 +31,7 @@ Template.websites.events({
   'click .js-show-website-form': function (event){
     $("#website_add_form").modal('show');
   },
-});
-
-Template.website.events({
+  
   'click .js-upvote': function(event) {
     if (Meteor.user()){
       Meteor.call('addVote', 
@@ -50,7 +48,11 @@ Template.website.events({
         this._id,
         -1)
     }
-  }
+  }  
+  
+});
+
+Template.website.events({
 });
 
 Template.website_add_form.events({  
