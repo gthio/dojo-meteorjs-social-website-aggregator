@@ -116,8 +116,7 @@ function addVote(userId,
     if (Votes.find({userId: userId, siteId: siteId})
       .count() == 0){
     
-        if (userId && siteId && vote){
-          
+        if (userId && siteId && vote){          
           Votes.insert({
             userId: userId,
             siteId: siteId,
@@ -126,7 +125,17 @@ function addVote(userId,
         }
       }
       else{
-        Votes.update({siteId: siteId, 
-          userId: userId}, {$set: {vote: vote}});
+        
+        var current = Votes.findOne({siteId: siteId, 
+          userId: userId});
+        
+        if (current.vote == vote){
+          Votes.remove({siteId: siteId, 
+            userId: userId});
+        }
+        else{        
+          Votes.update({siteId: siteId, 
+            userId: userId}, {$set: {vote: vote}});
+        }
       }   
-  }
+}
