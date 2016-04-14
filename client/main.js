@@ -9,6 +9,11 @@ Template.body.helpers({
   }
 });
 
+Template.registerHelper('formatDate', function(date, format) {
+  return moment(date).format(format);
+});
+
+
 Template.websites.helpers({
   websites: function(){
 	  return Websites.find({},
