@@ -154,20 +154,23 @@
         
         <div class="modal-header">
           <div class="modal-title">
+            Add website
           </div>  
         </div>
         
         <div class="modal-body">
           <form class="js-add-website">
-            <input type="text" name="website_url" />
-            <br/>
-            <button class="btn btn-success">
-              save
-            </button>
+            <div class="control-group row-fluid">
+              <label for="website_url" class="control-label">Website url:</label>&nbsp;
+              <input type="text" name="website_url" class="span5" />
+            </div>
           </form>          
         </div>
         
         <div class="modal-footer">
+          <button class="btn btn-success">
+            save
+          </button>          
           <button class="btn btn-warning" data-dismiss="modal">
             cancel
           </button>
