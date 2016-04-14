@@ -133,8 +133,8 @@ Meteor.methods({
           console.log(descriptionText)
          
           Websites.insert({
-            title: titleText,
-                  description: descriptionText,
+            title: titleText.trim(),
+                  description: descriptionText.trim(),
                   url: url,
                   createdOn: new Date(),
                   createdBy: userId
