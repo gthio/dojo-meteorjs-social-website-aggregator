@@ -13,7 +13,6 @@ Template.registerHelper('formatDate', function(date, format) {
   return moment(date).format(format);
 });
 
-
 Template.websites.helpers({
   websites: function(){
 	  return Websites.find({},
@@ -100,6 +99,19 @@ Template.comments.helpers({
     return Comments.find(
       {websiteID: websiteID},
       {sort: {createdOn: -1}});
+  }
+});
+
+Template.comment.helpers({
+  getUserName: function(userId) {
+    var user = Meteor.users.findOne({_id: userId});
+      
+    if (user){
+      return user.username;
+    }
+    else{
+      return "Anonymous"; 
+    }
   }
 });
 

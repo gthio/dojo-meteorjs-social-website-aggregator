@@ -60,10 +60,13 @@
 <template name="comment">
   <li>
     <p>
+      <small>
+        {{formatDate createdOn "DD.MM.YYYY HH:mm"}} - 
+        {{getUserName ownerID}}
+      </small>    
+      <br>  
       {{comment}}
     </p>
-    {{createdBy}}
-    {{createdOn}}
   </li>
 </template>
 
