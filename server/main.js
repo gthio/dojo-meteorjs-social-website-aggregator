@@ -6,6 +6,7 @@ Meteor.startup(function () {
     console.log("No websites yet. Creating starter data.");
     
     Websites.insert({
+      _id: "1",      
       title:"Goldsmiths Computing Department", 
       url:"http://www.gold.ac.uk/computing/", 
       description:"This is where this course was developed.", 
@@ -13,6 +14,7 @@ Meteor.startup(function () {
     });
     
     Websites.insert({
+      _id: "2",      
       title:"University of London", 
       url:"http://www.londoninternational.ac.uk/courses/undergraduate/goldsmiths/bsc-creative-computing-bsc-diploma-work-entry-route", 
       description:"University of London International Programme.", 
@@ -20,6 +22,7 @@ Meteor.startup(function () {
     });
     
     Websites.insert({
+      _id: "3",      
       title:"Coursera", 
       url:"http://www.coursera.org", 
       description:"Universal access to the world’s best education.", 
@@ -27,11 +30,43 @@ Meteor.startup(function () {
     });
     
     Websites.insert({
+      _id: "4",
       title:"Google", 
       url:"http://www.google.com", 
       description:"Popular search engine.", 
       createdOn:new Date()
     });
+    
+    Votes.insert({
+      siteId: "3",
+      userId: "1",
+      vote:1      
+    })
+
+    Votes.insert({
+      siteId: "3",
+      userId: "2",
+      vote:1  
+    })    
+
+    Votes.insert({
+      siteId: "3",
+      userId: "3",
+      vote:1  
+    })      
+    
+    Votes.insert({
+      siteId: "4",
+      userId: "1",
+      vote:-1      
+    })
+
+    Votes.insert({
+      siteId: "4",
+      userId: "2",
+      vote:-1  
+    })    
+      
   }
 });
 
