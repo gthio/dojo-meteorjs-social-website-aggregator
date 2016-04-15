@@ -88,15 +88,26 @@ Meteor.methods({
           return null;
         }
         else{         
-          websiteData = Scrape.website(url);
+          
+          var id = Math.random().toString();
+          var websiteData = Scrape.website(url);
                   
           Websites.insert({
+            _id: id,
             title: websiteData.title,
             description: websiteData.description,
             url: websiteData.domain,
             createdOn: new Date(),
             createdBy: userId
-          });   
+          }); 
+
+          for(tag of websiteData.tags){
+            Tags.insert({
+              siteId: id,
+              url: websiteData.domain,
+              tag: tag
+            });              
+          }          
         }
       });    
   },     
