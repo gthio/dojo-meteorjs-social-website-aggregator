@@ -15,7 +15,11 @@ Template.registerHelper('formatDate', function(date, format) {
 
 Template.websites.helpers({
   websites: function(){
+
+  return Websites.find({},
+    {sort: {votes: -1, createdOn: -1}});
     
+    /* 
     if (Session.get('searchFilter') == null ||
       Session.get('searchFilter') == '')
     {
@@ -27,6 +31,8 @@ Template.websites.helpers({
       return Websites.find({url: {$regex: Session.get('searchFilter'), $options: 'i'}},
         {sort: {votes: -1, createdOn: -1}});
     }
+    */
+    
   },
   
   isMyVote: function(websiteID,
@@ -125,12 +131,16 @@ Template.website_add_form.events({
       
     var url = event.target
       .website_url.value;
+      
+    if (url.toLowerCase().lastIndexOf('http') < 0){
+      url = 'http://' + url;
+    }
    
-   if (Meteor.user()){
-    Meteor.call('addWebsite',
-      Meteor.user()._id,
-      url);  
-   }
+    if (Meteor.user()){
+      Meteor.call('addWebsite',
+        Meteor.user()._id,
+        url);  
+    }
    
     $("#website_add_form").modal('show');
     
