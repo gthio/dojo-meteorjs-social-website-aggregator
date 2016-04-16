@@ -81,6 +81,13 @@
   </div>
 </template>
 
+<template name="searchFilter">
+  <div class="ui fluid mini input filterInput">
+    <input type="text" class="searchInput"  
+      placeholder="Filter..." value="{{searchValue}}">
+  </div>  
+</template>
+
 <template name="websites">
   
   {{> website_add_form}}
@@ -89,9 +96,13 @@
     
     {{#if currentUser}}
     
+    <div style="margin-bottom:10px;">
       <button class="btn btn-success js-show-website-form">
         add website
       </button>
+      
+      {{> searchFilter columnName="columnNameHere" number=boolean }}
+    </div>
       
     {{/if}} 
    

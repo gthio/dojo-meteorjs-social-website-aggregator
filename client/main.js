@@ -15,8 +15,18 @@ Template.registerHelper('formatDate', function(date, format) {
 
 Template.websites.helpers({
   websites: function(){
-	  return Websites.find({},
-      {sort: {votes: -1, createdOn: -1}});
+    
+    if (Session.get('searchFilter') == null ||
+      Session.get('searchFilter') == '')
+    {
+      return Websites.find({},
+        {sort: {votes: -1, createdOn: -1}});
+    }
+    else
+    {
+      return Websites.find({url: {$regex: Session.get('searchFilter'), $options: 'i'}},
+        {sort: {votes: -1, createdOn: -1}});
+    }
   },
   
   isMyVote: function(websiteID,
@@ -69,11 +79,45 @@ Template.websites.events({
         this._id,
         -1)
     }
-  }  
-  
+  },  
 });
 
 Template.website.events({
+});
+
+Template.searchFilter.events({
+  'keyup .searchInput': _.throttle(function(e, t) {
+    var searchFilter = Session.get('searchFilter') || {};
+    var searchValue = t.$('.searchInput').val();
+ 
+    if(searchValue){
+      if(this.number){
+        searchValue = parseFloat(t.$('.searchInput').val());
+      }
+ 
+      searchFilter[this.columnName] = searchValue;
+    }
+    else{
+      delete searchFilter[this.columnName];
+    }
+    Session.set('searchFilter', searchValue);
+    
+    console.log(searchValue);
+ 
+  },500)
+});
+ 
+Template.searchFilter.helpers({
+  searchValue: function() {
+    var searchFilter = Session.get('searchFilter');
+ 
+    if(searchFilter && searchFilter[this.columnName]){
+      return searchFilter[this.columnName];
+    } 
+    else {
+      return '';
+    }
+  }
 });
 
 Template.website_add_form.events({  
